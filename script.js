@@ -21,7 +21,16 @@ function helloWorld(){
   console.log("Running helloWorld()")
   firebase.database().ref('/').set(
     {
-      message: 'Hello World!'
+      message: src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpXtHm8mlOTucpO4JcfzPoCETqxS3w38lnw&s"
+    }
+  )
+};
+
+function readData(){
+  
+  firebase.database().ref('/').set(
+    {
+      message: src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpXtHm8mlOTucpO4JcfzPoCETqxS3w38lnw&s"
     }
   )
 }

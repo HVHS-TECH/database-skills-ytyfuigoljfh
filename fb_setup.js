@@ -8,13 +8,13 @@
 // Return: n/a
 /**************************************************************/
   const firebaseConfig = {
-    apiKey: ,
-    authDomain: ,
-    databaseURL: ,
-    projectId: ,
-    storageBucket: ,
-    messagingSenderId:,
-    appId:
+    apiKey: "AIzaSyC4wfoLVnegwQqApMEWhtknFQyXh7oXAB0",
+    authDomain: "free-v-bucks-9e966.firebaseapp.com",
+    databaseURL: "https://free-v-bucks-9e966-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "free-v-bucks-9e966",
+    storageBucket: "free-v-bucks-9e966.firebasestorage.app",
+    messagingSenderId: "930897563653",
+    appId: "1:930897563653:web:1006854448e5fc56fccc6c"
   };
 
   // Initialize Firebase
