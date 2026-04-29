@@ -7,6 +7,8 @@
  **************************************************************/
 
 const HTML_OUTPUT = document.getElementById("databaseOutput");
+const IMG_OUTPUT = document.getElementById("displayimg");
+
 
 /**************************************************************/
 // helloWorld()
@@ -21,16 +23,36 @@ function helloWorld(){
   console.log("Running helloWorld()")
   firebase.database().ref('/').set(
     {
-      message: src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpXtHm8mlOTucpO4JcfzPoCETqxS3w38lnw&s"
+      message: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpXtHm8mlOTucpO4JcfzPoCETqxS3w38lnw&s"
+    }
+  )
+};
+
+function helloWorld2(){
+  console.log("Running helloWorld2()")
+  firebase.database().ref('/').set(
+    {
+      message: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
     }
   )
 };
 
 function readData(){
-  
-  firebase.database().ref('/').set(
-    {
-      message: src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpXtHm8mlOTucpO4JcfzPoCETqxS3w38lnw&s"
-    }
-  )
-}
+  firebase.database().ref('/').child("message").once("value", display, fb_readError)
+  console.log("readed database")
+};
+
+function display(snapshot){
+  dbData = snapshot.val();
+  if(dbData == null){
+    console.log("nothing")
+  } else {
+    HTML_OUTPUT.innerHTML = snapshot.val();
+    IMG_OUTPUT.src = snapshot.val();
+  }
+};
+
+function fb_readError(error){
+  console.log("uh oh somthing went very very wrong");
+  console.error(error);
+};
