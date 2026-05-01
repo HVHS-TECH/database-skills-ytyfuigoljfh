@@ -19,6 +19,20 @@ const IMG_OUTPUT = document.getElementById("displayimg");
 // The ref('/') part tells the operation to write to the base level of the database "/"
 // This means it replaces the whole database with message:Hello World
 /**************************************************************/
+
+users = {
+  orange: {
+    x: 0,
+    y: 0,
+    score: 0
+  },
+  fridge: {
+    x: 22,
+    y: 83 ,
+    score: -7
+  }
+};
+
 function helloWorld(){
   console.log("Running helloWorld()")
   firebase.database().ref('/').set(
@@ -55,4 +69,9 @@ function display(snapshot){
 function fb_readError(error){
   console.log("uh oh somthing went very very wrong");
   console.error(error);
+};
+
+function fb_readListener(){
+  console.log("listen")
+  firebase.database().ref("/message").on("value", readData)
 };
