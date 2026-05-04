@@ -24,35 +24,37 @@ users = {
   orange: {
     x: 0,
     y: 0,
-    score: 0
+    score: 0,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
   },
   fridge: {
     x: 22,
     y: 83 ,
-    score: -7
+    score: -7,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
   }
 };
 
+firebase.database().ref("/").set(users)
+
+var username = "orange"
+
 function helloWorld(){
   console.log("Running helloWorld()")
-  firebase.database().ref('/').set(
-    {
-      message: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpXtHm8mlOTucpO4JcfzPoCETqxS3w38lnw&s"
-    }
+  firebase.database().ref('/' + username + "/img").set(
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrpXtHm8mlOTucpO4JcfzPoCETqxS3w38lnw&s"
   )
 };
 
 function helloWorld2(){
   console.log("Running helloWorld2()")
-  firebase.database().ref('/').set(
-    {
-      message: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
-    }
+  firebase.database().ref('/' + username + "/img").set(
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
   )
 };
 
 function readData(){
-  firebase.database().ref('/').child("message").once("value", display, fb_readError)
+  firebase.database().ref('/' + username + "/img").once("value", display, fb_readError)
   console.log("readed database")
 };
 
@@ -73,5 +75,5 @@ function fb_readError(error){
 
 function fb_readListener(){
   console.log("listen")
-  firebase.database().ref("/message").on("value", readData)
+  firebase.database().ref('/' + username + "/img").on("value", readData)
 };
