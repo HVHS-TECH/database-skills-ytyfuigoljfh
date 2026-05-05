@@ -22,15 +22,17 @@ const IMG_OUTPUT = document.getElementById("displayimg");
 
 users = {
   orange: {
-    x: 0,
+    x: 8,
     y: 0,
-    score: 0,
+    score: 82,
+    text: "WaWa",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
   },
   fridge: {
     x: 22,
     y: 83 ,
     score: -7,
+    text: "poo",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
   }
 };
@@ -53,19 +55,43 @@ function helloWorld2(){
   )
 };
 
+function helloWorld4(){
+  console.log("Running helloWorld4()")
+  firebase.database().ref('/' + username + "/img").set(
+    "https://media.tenor.com/4BkLxOmj-_gAAAAj/deltarune-tenna.gif"
+  )
+};
+
+function helloWorld3(){
+  console.log("Running helloWorld23)")
+  firebase.database().ref('/' + username).once("value", display, fb_readError)
+};
+
 function readData(){
-  firebase.database().ref('/' + username + "/img").once("value", display, fb_readError)
+  firebase.database().ref('/' + username).once("value", display, fb_readError)
+  console.log("readed database")
+};
+
+function readscore(){
+  firebase.database().ref('/').once("value", displayscore, fb_readError)
   console.log("readed database")
 };
 
 function display(snapshot){
   dbData = snapshot.val();
+  console.log(dbData)
   if(dbData == null){
     console.log("nothing")
   } else {
-    HTML_OUTPUT.innerHTML = snapshot.val();
-    IMG_OUTPUT.src = snapshot.val();
+    HTML_OUTPUT.innerHTML = dbData["text"];
+    IMG_OUTPUT.src = dbData["img"];
   }
+};
+
+function displayscore(snapshot){
+  dbData = snapshot.val();
+  console.log(dbData[username]["score"] + " points")
+
 };
 
 function fb_readError(error){
@@ -75,5 +101,5 @@ function fb_readError(error){
 
 function fb_readListener(){
   console.log("listen")
-  firebase.database().ref('/' + username + "/img").on("value", readData)
+  firebase.database().ref('/' + username).on("value", readData)
 };
