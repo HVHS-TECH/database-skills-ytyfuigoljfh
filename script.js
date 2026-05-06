@@ -40,6 +40,13 @@ users = {
 firebase.database().ref("/").set(users)
 
 var username = "orange"
+var names = Object.keys(users)
+console.log(names)
+
+for(i = 0; i < names.length; i++){
+  let key = names[i];
+  console.log("user " + i + " is " + key)
+}
 
 function helloWorld(){
   console.log("Running helloWorld()")
@@ -90,9 +97,15 @@ function display(snapshot){
 
 function displayscore(snapshot){
   dbData = snapshot.val();
-  console.log(dbData[username]["score"] + " points")
+  //console.log(dbData[username]["score"] + " points")
+  snapshot.forEach(fb_showOneScore)
 
 };
+
+
+function fb_showOneScore(child){
+  console.log(child.key + " got " + child.val())
+}
 
 function fb_readError(error){
   console.log("uh oh somthing went very very wrong");
