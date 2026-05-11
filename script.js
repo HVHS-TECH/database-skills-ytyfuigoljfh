@@ -9,6 +9,8 @@
 const HTML_OUTPUT = document.getElementById("databaseOutput");
 const IMG_OUTPUT = document.getElementById("displayimg");
 
+var GLOBAL_user
+
 
 /**************************************************************/
 // helloWorld()
@@ -19,6 +21,29 @@ const IMG_OUTPUT = document.getElementById("displayimg");
 // The ref('/') part tells the operation to write to the base level of the database "/"
 // This means it replaces the whole database with message:Hello World
 /**************************************************************/
+
+function fb_login(){
+  firebase.auth().onAuthStateChanged(fb_handleLogin);
+};
+
+function fb_handleLogin(_user){
+  if(_user){
+    console.log("user is logedined")
+    GLOBAL_user = _user 
+  } else {
+    fb_popupLogin();
+    console.log("loging in user")
+  };
+};
+
+function fb_popupLogin(){
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  firebase.auth().signInWithPopup(provider).then((result) => {
+    GLOBAL_user = result.user;
+    console.log("log in user")
+  })
+}
 
 users = {
   orange: {
@@ -116,3 +141,6 @@ function fb_readListener(){
   console.log("listen")
   firebase.database().ref('/' + username).on("value", readData)
 };
+
+
+
