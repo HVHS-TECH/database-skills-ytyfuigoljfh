@@ -10,6 +10,7 @@ const HTML_OUTPUT = document.getElementById("databaseOutput");
 const IMG_OUTPUT = document.getElementById("displayimg");
 
 var GLOBAL_user
+var authenticationListener
 
 
 /**************************************************************/
@@ -23,7 +24,7 @@ var GLOBAL_user
 /**************************************************************/
 
 function fb_login(){
-  firebase.auth().onAuthStateChanged(fb_handleLogin);
+  authenticationListener = firebase.auth().onAuthStateChanged(fb_handleLogin);
 };
 
 function fb_handleLogin(_user){
@@ -43,6 +44,12 @@ function fb_popupLogin(){
     GLOBAL_user = result.user;
     console.log("log in user")
   })
+}
+
+function fb_logout(){
+  authenticationListener();
+  firebase.auth().signOut();
+  console.log("loged out >:) evilness")
 }
 
 users = {
@@ -129,7 +136,7 @@ function displayscore(snapshot){
 
 
 function fb_showOneScore(child){
-  console.log(child.key + " got " + child.val())
+  console.log(child.key + " got " + child.val().score)
 }
 
 function fb_readError(error){
