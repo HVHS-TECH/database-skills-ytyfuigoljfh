@@ -52,24 +52,26 @@ function fb_logout(){
   console.log("loged out >:) evilness")
 }
 
-users = {
-  orange: {
-    x: 8,
-    y: 0,
-    score: 82,
-    text: "WaWa",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
-  },
-  fridge: {
-    x: 22,
-    y: 83 ,
-    score: -7,
-    text: "poo",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
-  }
-};
-
-firebase.database().ref("/").set(users)
+function resetDatabase(){
+  console.log("reseting database")
+  users = {
+    orange: {
+      x: 8,
+      y: 0,
+      score: 82,
+      text: "WaWa",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
+    },
+    fridge: {
+      x: 22,
+      y: 83 ,
+      score: -7,
+      text: "poo",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLpZSBThXbbwMCqZaa1d8s9GUMl4QRNaTHIQ&s"
+    }
+  };
+  firebase.database().ref("/").set(users)
+}
 
 var username = "orange"
 var names = Object.keys(users)
